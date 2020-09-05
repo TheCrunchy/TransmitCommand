@@ -16,7 +16,7 @@ using VRageMath;
 
 namespace TransmitCommand
 {
-    class Commands
+    public class Commands : CommandModule
     {
         [Command("transmit", "delete beacons if they arent working")]
         [Permission(MyPromoteLevel.Admin)]
