@@ -90,33 +90,6 @@ namespace TransmitCommand
                         broadcastRange = 5;
 
                     }
-                    if (PCU >= 10000)
-                    {
-
-                        broadcastRange = 20000;
-
-                    }
-                    if (PCU >= 20000)
-                    {
-
-                        broadcastRange = 30000;
-
-                    }
-                    if (PCU >= 30000)
-                    {
-
-                        broadcastRange = 500000;
-                    }
-                    if (PCU >= 45000)
-                    {
-
-                        broadcastRange = 1000000;
-                    }
-                    if (PCU >= 60000)
-                    {
-
-                        broadcastRange = 2000000;
-                    }
                     IMyFaction gridOwner = FacUtils.GetPlayersFaction(FacUtils.GetOwner(grid));
 
                     foreach (MyPlayer p in MySession.Static.Players.GetOnlinePlayers())

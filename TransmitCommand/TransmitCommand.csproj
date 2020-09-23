@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FixPlayerCommand\FixPlayerCommand\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\FixPlayerCommand\FixPlayerCommand\bin\Debug\NLog.dll</HintPath>
     </Reference>
@@ -73,6 +77,8 @@
   <ItemGroup>
     <Compile Include="Commands.cs" />
     <Compile Include="FacUtils.cs" />
+    <Compile Include="FileUtils.cs" />
+    <Compile Include="StorageFile.cs" />
     <Compile Include="TransmitPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
