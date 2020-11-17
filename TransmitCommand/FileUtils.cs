@@ -5,20 +5,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TransmitCommand
 {
     class FileUtils
     {
-       
-        public void WriteToJsonFile<T>(string filePath, T objectToWrite, bool append = false) where T : new()
+
+        public void WriteToXmlFile<T>(string filePath, T objectToWrite, bool append = false) where T : new()
         {
             TextWriter writer = null;
             try
             {
-                var contentsToWriteToFile = JsonConvert.SerializeObject(objectToWrite);
+                var serializer = new XmlSerializer(typeof(T));
                 writer = new StreamWriter(filePath, append);
-                writer.Write(contentsToWriteToFile);
+                serializer.Serialize(writer, objectToWrite);
             }
             finally
             {
@@ -27,14 +28,14 @@ namespace TransmitCommand
             }
         }
 
-        public T ReadFromJsonFile<T>(string filePath) where T : new()
+        public T ReadFromXmlFile<T>(string filePath) where T : new()
         {
             TextReader reader = null;
             try
             {
+                var serializer = new XmlSerializer(typeof(T));
                 reader = new StreamReader(filePath);
-                var fileContents = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<T>(fileContents);
+                return (T)serializer.Deserialize(reader);
             }
             finally
             {
@@ -43,4 +44,5 @@ namespace TransmitCommand
             }
         }
     }
+
 }

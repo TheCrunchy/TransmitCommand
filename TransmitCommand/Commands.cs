@@ -18,6 +18,13 @@ namespace TransmitCommand
 {
     public class Commands : CommandModule
     {
+        [Command("radar reload", "Reload the config")]
+        [Permission(MyPromoteLevel.Admin)]
+        public void ReloadConfig()
+        {
+            TransmitPlugin.LoadFile();
+            Context.Respond("Reloaded config");
+        }
         [Command("transmit", "delete beacons if they arent working")]
         [Permission(MyPromoteLevel.Admin)]
         public void transmit()
@@ -45,7 +52,9 @@ namespace TransmitCommand
                 bool NPC = false;
                 foreach (var item in group.Nodes)
                 {
+                    
                     MyCubeGrid grid = item.NodeData;
+                   // TransmitPlugin.Log.Info(grid.DisplayName);
                     if (((int)grid.Flags & 4) != 0)
                     {
                         //concealed

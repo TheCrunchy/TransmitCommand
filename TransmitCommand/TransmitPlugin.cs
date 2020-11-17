@@ -17,24 +17,13 @@ namespace TransmitCommand
         public override void Init(ITorchBase torch)
         {
             base.Init(torch);
-            Log.Info("OOOOOOOOOH RADAR");
+            Log.Info("Shitty radar enabled");
 
-            CreatePath();
+            SetupConfig();
             LoadFile();
         }
         public static string path;
-        public string CreatePath()
-        {
-            string fileName = "CrunchRadar";
 
-            foreach (var c in Path.GetInvalidFileNameChars())
-                fileName = fileName.Replace(c, '_');
-
-            var folder = Path.Combine(StoragePath, fileName);
-            Directory.CreateDirectory(folder);
-           
-            return folder;
-        }
         public static void SaveConfigFile(StorageFile storage)
         {
             string fileName = "CrunchRadar";
@@ -42,14 +31,32 @@ namespace TransmitCommand
             var folder = Path.Combine(path, fileName);
             Directory.CreateDirectory(path + fileName);
             FileUtils xml = new FileUtils();
-            xml.WriteToJsonFile(path + "CrunchRadar.json", storage, false);
+            xml.WriteToXmlFile(path + "CrunchRadar.xml", storage, false);
 
+        }
+        private void SetupConfig()
+        {
+            FileUtils utils = new FileUtils();
+            path = StoragePath;
+           
+            if (File.Exists(StoragePath + "\\CrunchRadar.xml"))
+            {
+                config = utils.ReadFromXmlFile<StorageFile>(StoragePath + "\\CrunchRadar.xml");
+                utils.WriteToXmlFile<StorageFile>(StoragePath + "\\CrunchRadar.xml", config, false);
+            }
+            else
+            {
+                config = new StorageFile();
+                utils.WriteToXmlFile<StorageFile>(StoragePath + "\\CrunchRadar.xml", config, false);
+            }
+   
         }
         public static StorageFile LoadFile()
         {
 
             FileUtils xml = new FileUtils();
-            StorageFile file = xml.ReadFromJsonFile<StorageFile>(path + "CrunchRadar.json");
+        
+            StorageFile file = xml.ReadFromXmlFile<StorageFile>(path + "\\CrunchRadar.xml");
             if (file == null)
             {
                 TransmitPlugin.Log.Info("No file");
