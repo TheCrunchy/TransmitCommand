@@ -59,6 +59,7 @@ namespace TransmitCommand
                     {
                         break;
                     }
+                    
                     //this bit requires a fac utils to get the faction tag, you can remove it if you dont need it
                     foreach (long l in grid.BigOwners)
                     {
@@ -82,12 +83,12 @@ namespace TransmitCommand
 
                     if (PCU <= 10000)
                     {
-                        broadcastRange = 3000;
+                        broadcastRange = grid.BlocksPCU * TransmitPlugin.config.KilometerPer1000PCU;
 
                     }
-                    if (PCU < 1000)
+                    if (PCU < TransmitPlugin.config.minimumPCU)
                     {
-                        broadcastRange = 5;
+                        break;
 
                     }
                     IMyFaction gridOwner = FacUtils.GetPlayersFaction(FacUtils.GetOwner(grid));
@@ -127,7 +128,7 @@ namespace TransmitCommand
                             MyGps gpsRef = gps;
                             long entityId = 0L;
                             entityId = gps.EntityId;
-                            gpsCollection.SendAddGps(p.Identity.IdentityId, ref gpsRef, entityId, false);
+                            gpsCollection.SendAddGps(p.Identity.IdentityId, ref gpsRef, entityId, TransmitPlugin.config.soundForGPS);
                         }
 
                     }

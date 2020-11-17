@@ -12,6 +12,7 @@ namespace TransmitCommand
 {
     public class TransmitPlugin : TorchPluginBase
     {
+        public static StorageFile config;
         public static Logger Log = LogManager.GetCurrentClassLogger();
         public override void Init(ITorchBase torch)
         {
@@ -19,6 +20,7 @@ namespace TransmitCommand
             Log.Info("OOOOOOOOOH RADAR");
 
             CreatePath();
+            LoadFile();
         }
         public static string path;
         public string CreatePath()
@@ -30,7 +32,7 @@ namespace TransmitCommand
 
             var folder = Path.Combine(StoragePath, fileName);
             Directory.CreateDirectory(folder);
-
+           
             return folder;
         }
         public static void SaveConfigFile(StorageFile storage)
@@ -48,8 +50,13 @@ namespace TransmitCommand
 
             FileUtils xml = new FileUtils();
             StorageFile file = xml.ReadFromJsonFile<StorageFile>(path + "CrunchRadar.json");
-            return file;
+            if (file == null)
+            {
+                TransmitPlugin.Log.Info("No file");
+            }
 
+            return file;
+        
         }
     }
 }

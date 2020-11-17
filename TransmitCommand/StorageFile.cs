@@ -8,7 +8,8 @@ namespace TransmitCommand
 {
     public class StorageFile
     {
-        public Dictionary<int, int> PCUMap = new Dictionary<int, int>();
-        public int minimumPCU = 1000;
+        public int KilometerPer1000PCU = 2;
+        public int minimumPCU = 10000;
+        public Boolean soundForGPS = false;
     }
 }
