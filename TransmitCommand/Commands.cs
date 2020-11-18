@@ -64,7 +64,7 @@ namespace TransmitCommand
                     {
                         break;
                     }
-                    if (MyGravityProviderSystem.IsPositionInNaturalGravity(grid.PositionComp.GetPosition()))
+                    if (MyGravityProviderSystem.IsPositionInNaturalGravity(grid.PositionComp.GetPosition()) && TransmitPlugin.config.broadcastInGravity)
                     {
                         break;
                     }
@@ -90,11 +90,10 @@ namespace TransmitCommand
                     float broadcastRange = 0;
                     MyGpsCollection gpsCollection = (MyGpsCollection)MyAPIGateway.Session?.GPS;
 
-                    if (PCU <= 10000)
-                    {
-                        broadcastRange = grid.BlocksPCU * TransmitPlugin.config.KilometerPer1000PCU;
+               
+                        broadcastRange = grid.BlocksPCU * TransmitPlugin.config.meterPerPCU;
 
-                    }
+                  
                     if (PCU < TransmitPlugin.config.minimumPCU)
                     {
                         break;
@@ -120,12 +119,12 @@ namespace TransmitCommand
                                 }
                                 else
                                 {
-                                    gps = CreateGps(grid, Color.DarkRed, 60, broadcastRange);
+                                    gps = CreateGps(grid, Color.Red, 60, broadcastRange);
                                 }
                             }
                             else
                             {
-                                gps = CreateGps(grid, Color.DarkRed, 60, broadcastRange);
+                                gps = CreateGps(grid, Color.Red, 60, broadcastRange);
                             }
 
                             gpsList.Add(gps);
@@ -152,8 +151,8 @@ namespace TransmitCommand
             MyGps gps = new MyGps
             {
                 Coords = grid.PositionComp.GetPosition(),
-                Name = "Radar Signature - " + distance + " - " + grid.DisplayName,
-                DisplayName = "Radar Signature - " + distance + " - " + grid.DisplayName,
+                Name = "Radar Signature - " + distance + "m - " + grid.DisplayName,
+                DisplayName = "Radar Signature - " + distance + "m - " + grid.DisplayName,
                 GPSColor = gpsColor,
                 IsContainerGPS = true,
                 ShowOnHud = true,
