@@ -12,5 +12,6 @@ namespace TransmitCommand
         public int minimumPCU = 10000;
         public Boolean soundForGPS = false;
         public Boolean broadcastInGravity = false;
+        public Boolean broadcastStations = false;
     }
 }

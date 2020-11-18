@@ -60,11 +60,11 @@ namespace TransmitCommand
                         //concealed
                         break;
                     }
-                    if (grid.IsStatic)
+                    if (grid.IsStatic && !TransmitPlugin.config.broadcastStations)
                     {
                         break;
                     }
-                    if (MyGravityProviderSystem.IsPositionInNaturalGravity(grid.PositionComp.GetPosition()) && TransmitPlugin.config.broadcastInGravity)
+                    if (MyGravityProviderSystem.IsPositionInNaturalGravity(grid.PositionComp.GetPosition()) && !TransmitPlugin.config.broadcastInGravity)
                     {
                         break;
                     }
