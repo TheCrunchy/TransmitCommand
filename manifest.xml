@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <PluginManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>CrunchRadar</Name>
-  <Guid>501b646b-50d2-451d-80b4-9ef92350ea32</Guid>
+  <Guid>c887b5c9-183c-4d6f-85cc-bff873ee9ea6</Guid>
   <Version>v1.0.1</Version>
 </PluginManifest>
